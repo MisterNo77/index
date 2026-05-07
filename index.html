@@ -486,7 +486,7 @@ function save(){
 // AUTO-GUTSCHRIFTEN
 function applyDA1Months(){
   const cur=new Date().getFullYear()+'-'+String(new Date().getMonth()+1).padStart(2,'0');
-  S.da1months.forEach(m=>{if(m.month<cur&&!m.applied){S.konto.da1=+(S.konto.da1+m.value).toFixed(2);m.applied=true;}});
+  S.da1months.forEach(m=>{if(m.month<=cur&&!m.applied){S.konto.da1=+(S.konto.da1+m.value).toFixed(2);m.applied=true;}});
 }
 function applyJG(){
   const today=ds(new Date());
@@ -571,7 +571,7 @@ function renDA1List(){
   if(!S.da1months.length){el.innerHTML='';return;}
   const cur=new Date().getFullYear()+'-'+String(new Date().getMonth()+1).padStart(2,'0');
   el.innerHTML=S.da1months.map(m=>{
-    const past=m.month<cur||m.applied;
+    const past=m.month<=cur||m.applied;
     return`<div class="list-item"><span style="font-family:var(--mo);font-size:12px;">${MDE[parseInt(m.month.split('-')[1])-1]} ${m.month.split('-')[0]}</span><span style="font-family:var(--mo);font-size:13px;color:${past?'var(--ac)':'var(--mu)'};">${m.value>=0?'+':''}${fmt(m.value)}h ${past?'✓':'⏳'}</span><button onclick="delDA1M('${m.month}')" style="background:none;border:none;color:var(--mu);cursor:pointer;font-size:17px;">×</button></div>`;
   }).join('');
 }
