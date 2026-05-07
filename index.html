@@ -371,12 +371,18 @@ select:focus{outline:none;border-color:var(--ac);}
       <div class="tb t-frueh" id="btn-frueh" onclick="mSel('frueh')">🌅<br>FRÜH<br><span style="font-size:8px;opacity:.7;">−6h DA1</span></div>
       <div class="tb t-nacht" id="btn-nacht" onclick="mSel('nacht')">🌙<br>NACHT<br><span style="font-size:8px;opacity:.7;">−10h DA1</span></div>
     </div>
+    <div class="typ-grid" style="grid-template-columns:1fr;margin-bottom:12px;">
+      <div class="tb t-frueh" id="btn-fn_da1" onclick="mSel('fn_da1')" style="border-color:rgba(99,102,241,.5);color:#a5b4fc;">🌅🌙 FRÜH+NACHT DA1<br><span style="font-size:8px;opacity:.7;">−16h DA1 (6h+10h)</span></div>
+    </div>
 
     <div class="sec-lbl" style="color:var(--ac2);">🩵 DA2 Abbau</div>
     <div class="typ-grid">
       <div class="tb t-spaet2" id="btn-spaet2" onclick="mSel('spaet2')">🌆<br>SPÄT<br><span style="font-size:8px;opacity:.7;">−8h DA2</span></div>
       <div class="tb t-frueh2" id="btn-frueh2" onclick="mSel('frueh2')">🌅<br>FRÜH<br><span style="font-size:8px;opacity:.7;">−6h DA2</span></div>
       <div class="tb t-nacht2" id="btn-nacht2" onclick="mSel('nacht2')">🌙<br>NACHT<br><span style="font-size:8px;opacity:.7;">−10h DA2</span></div>
+    </div>
+    <div class="typ-grid" style="grid-template-columns:1fr;margin-bottom:12px;">
+      <div class="tb t-spaet2" id="btn-fn_da2" onclick="mSel('fn_da2')" style="border-color:rgba(34,211,238,.5);color:#67e8f9;">🌅🌙 FRÜH+NACHT DA2<br><span style="font-size:8px;opacity:.7;">−16h DA2 (6h+10h)</span></div>
     </div>
 
     <div class="sec-lbl" style="color:var(--mu);">Sonstige</div>
@@ -396,10 +402,16 @@ select:focus{outline:none;border-color:var(--ac);}
       <div class="tb t-gut" id="btn-gut_da1_frueh" onclick="mSel('gut_da1_frueh')">🔵🌅<br>DA1+<br><span style="font-size:8px;opacity:.7;">+6h</span></div>
       <div class="tb t-gut" id="btn-gut_da1_nacht" onclick="mSel('gut_da1_nacht')">🔵🌙<br>DA1+<br><span style="font-size:8px;opacity:.7;">+10h</span></div>
     </div>
+    <div class="typ-grid" style="grid-template-columns:1fr;margin-bottom:7px;">
+      <div class="tb t-gut" id="btn-gut_da1_fn" onclick="mSel('gut_da1_fn')">🔵🌅🌙 DA1+ FRÜH+NACHT<br><span style="font-size:8px;opacity:.7;">+16h DA1</span></div>
+    </div>
     <div class="typ-grid" style="margin-bottom:7px;">
       <div class="tb t-gut-da2" id="btn-gut_da2_spaet" onclick="mSel('gut_da2_spaet')">🩵🌆<br>DA2+<br><span style="font-size:8px;opacity:.7;">+8h</span></div>
       <div class="tb t-gut-da2" id="btn-gut_da2_frueh" onclick="mSel('gut_da2_frueh')">🩵🌅<br>DA2+<br><span style="font-size:8px;opacity:.7;">+6h</span></div>
       <div class="tb t-gut-da2" id="btn-gut_da2_nacht" onclick="mSel('gut_da2_nacht')">🩵🌙<br>DA2+<br><span style="font-size:8px;opacity:.7;">+10h</span></div>
+    </div>
+    <div class="typ-grid" style="grid-template-columns:1fr;margin-bottom:7px;">
+      <div class="tb t-gut-da2" id="btn-gut_da2_fn" onclick="mSel('gut_da2_fn')">🩵🌅🌙 DA2+ FRÜH+NACHT<br><span style="font-size:8px;opacity:.7;">+16h DA2</span></div>
     </div>
     <div class="typ-grid" style="margin-bottom:7px;">
       <div class="tb t-gut-ft" id="btn-gut_ft_spaet" onclick="mSel('gut_ft_spaet')">🎉🌆<br>FT+<br><span style="font-size:8px;opacity:.7;">+8h</span></div>
@@ -658,7 +670,7 @@ function renVerlauf(){
 }
 
 // KALENDER
-const KAL_LABELS={spaet:'S',fn:'F/N',frueh:'F',nacht:'N',spaet2:'S2',frueh2:'F2',nacht2:'N2',urlaub:'Url',krank:'Kr',lehrgang:'Lhr',gut_da1_spaet:'D1+',gut_da1_frueh:'D1+',gut_da1_nacht:'D1+',gut_da2_spaet:'D2+',gut_da2_frueh:'D2+',gut_da2_nacht:'D2+',gut_ft_spaet:'FT+',gut_ft_frueh:'FT+',gut_ft_nacht:'FT+',gut_ft_mittnacht:'FT+'};
+const KAL_LABELS={fn_da1:'F/N',fn_da2:'F/N2',gut_da1_fn:'D1+',gut_da2_fn:'D2+',spaet:'S',fn:'F/N',frueh:'F',nacht:'N',spaet2:'S2',frueh2:'F2',nacht2:'N2',urlaub:'Url',krank:'Kr',lehrgang:'Lhr',gut_da1_spaet:'D1+',gut_da1_frueh:'D1+',gut_da1_nacht:'D1+',gut_da2_spaet:'D2+',gut_da2_frueh:'D2+',gut_da2_nacht:'D2+',gut_ft_spaet:'FT+',gut_ft_frueh:'FT+',gut_ft_nacht:'FT+',gut_ft_mittnacht:'FT+'};
 
 function renKal(){
   const y=S.vy,m=S.vm;
@@ -722,10 +734,10 @@ function closeMo(){
 }
 
 // Abzug-Maps
-const DA1_ABZUG={spaet:8,frueh:6,nacht:10};
-const DA2_ABZUG={spaet2:8,frueh2:6,nacht2:10};
-const DA1_GUT={gut_da1_spaet:8,gut_da1_frueh:6,gut_da1_nacht:10};
-const DA2_GUT={gut_da2_spaet:8,gut_da2_frueh:6,gut_da2_nacht:10};
+const DA1_ABZUG={spaet:8,frueh:6,nacht:10,fn_da1:16};
+const DA2_ABZUG={spaet2:8,frueh2:6,nacht2:10,fn_da2:16};
+const DA1_GUT={gut_da1_spaet:8,gut_da1_frueh:6,gut_da1_nacht:10,gut_da1_fn:16};
+const DA2_GUT={gut_da2_spaet:8,gut_da2_frueh:6,gut_da2_nacht:10,gut_da2_fn:16};
 const FT_GUT={gut_ft_spaet:8,gut_ft_frueh:6,gut_ft_nacht:10,gut_ft_mittnacht:6};
 
 function saveMo(){
